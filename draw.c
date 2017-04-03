@@ -51,24 +51,18 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
   for ( point = 0; point < points->lastcol-2; point += 3 ) {
     draw_line( polygons->m[0][point],
 	       polygons->m[1][point],
-	       polygons->m[2][point],
 	       polygons->m[0][point+1],
 	       polygons->m[1][point+1],
-	       polygons->m[2][point+1],
 	       s, c );
     draw_line( polygons->m[0][point],
 	       polygons->m[1][point],
-	       polygons->m[2][point],
 	       polygons->m[0][point+2],
 	       polygons->m[1][point+2],
-	       polygons->m[2][point+2],
 	       s, c );
     draw_line( polygons->m[0][point+1],
 	       polygons->m[1][point+1],
-	       polygons->m[2][point+1],
 	       polygons->m[0][point+2],
 	       polygons->m[1][point+2],
-	       polygons->m[2][point+2],
 	       s, c );
 
 }
