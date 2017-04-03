@@ -48,7 +48,7 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
   }
 
   int point;
-  for ( point = 0; point < points->lastcol-2; point += 3 ) {
+  for ( point = 0; point < polygons->lastcol-2; point += 3 ) {
     draw_line( polygons->m[0][point],
 	       polygons->m[1][point],
 	       polygons->m[0][point+1],
@@ -65,6 +65,7 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
 	       polygons->m[1][point+2],
 	       s, c );
 
+  }
 }
 
 
@@ -87,13 +88,32 @@ void add_box( struct matrix * edges,
 	      double width, double height, double depth ) {
 
   double x0, y0, z0, x1, y1, z1;
+
   x0 = x;
   x1 = x+width;
   y0 = y;
   y1 = y-height;
   z0 = z;
   z1 = z-depth;
+  
+  add_polygon(edges, x0, y0, z0, x1, y0, z0, x1, y1, z0);
+  add_polygon(edges, x0, y0, z0, x0, y1, z0, x1, y1, z0);
 
+  add_polygon(edges, x1, y1, z0, x1, y1, z1, x0, y1, z0);
+  add_polygon(edges, x0, y1, z0, x0, y1, z1, x1, y1, z1);
+
+  add_polygon(edges, x0, y0, z0, x0, y1, z1, x0, y1, z1);
+  add_polygon(edges, x0, y0, z0, x0, y0, z1, x0, y1, z1);
+
+  add_polygon(edges, x0, y0, z1, x0, y1, z1, x1, y1, z1);
+  add_polygon(edges, x0, y0, z1, x1, y1, z1, x1, y0, z1);
+
+  add_polygon(edges, x1, y0, z0, x1, y1, z0, x1, y1, z1);
+  add_polygon(edges, x1, y0, z0, x1, y0, z1, x1, y1, z1);
+
+  add_polygon(edges, x0, y0, z0, x0, y0, z1, x1, y0, z1);
+  add_polygon(edges, x0, y0, z0, x1, y0, z0, x1, y0, z1);
+  /*
   //front
   add_edge(edges, x0, y0, z0, x0+2, y0+2, z0+2);
   add_edge(edges, x1, y0, z0, x1+2, y0+2, z0+2);
@@ -105,6 +125,7 @@ void add_box( struct matrix * edges,
   add_edge(edges, x1, y0, z1, x1+2, y0+2, z1+2);
   add_edge(edges, x1, y1, z1, x1+2, y1+2, z1+2);
   add_edge(edges, x0, y1, z1, x0+2, y1+2, z1+2);
+  */
 }
 
 /*======== void add_sphere() ==========
@@ -416,20 +437,20 @@ to the screen
 ====================*/
 void draw_lines( struct matrix * points, screen s, color c) {
 
- if ( points->lastcol < 2 ) {
-   printf("Need at least 2 points to draw a line!\n");
-   return;
- }
+  if ( points->lastcol < 2 ) {
+    printf("Need at least 2 points to draw a line!\n");
+    return;
+  }
  
- int point;
- for (point=0; point < points->lastcol-1; point+=2)
-   draw_line( points->m[0][point],
-	      points->m[1][point],
-	      points->m[0][point+1],
-	      points->m[1][point+1],
-	      s, c);	       
+  int point;
+  for (point=0; point < points->lastcol-1; point+=2)
+    draw_line( points->m[0][point],
+	       points->m[1][point],
+	       points->m[0][point+1],
+	       points->m[1][point+1],
+	       s, c);	       
 }// end draw_lines
-
+ 
 
 
 
