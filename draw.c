@@ -148,6 +148,33 @@ void add_sphere( struct matrix * edges,
 		 double r, double step ) {
 
   struct matrix *points = generate_sphere(cx, cy, cz, r, step);
+  int i, j;
+  int num_steps = (int) (1/step+1);
+  
+  for ( i = 0; i < num_steps-2; i++ ) {
+    for ( j = 0; j < num_steps-2; j++ ) {
+      add_polygon( edges,
+		    points->m[0][(i*num_steps)+j], points->m[1][(i*num_steps)+j], points->m[2][(i*num_steps)+j],
+		    points->m[0][(i*num_steps)+j+num_steps], points->m[1][(i*num_steps)+j+num_steps], points->m[2][(i*num_steps)+j+num_steps],
+		    points->m[0][(i*num_steps)+j+num_steps+1], points->m[1][(i*num_steps)+j+num_steps+1], points->m[2][(i*num_steps)+j+num_steps+1] );
+      add_polygon( edges,
+		    points->m[0][(i*num_steps)+j], points->m[1][(i*num_steps)+j], points->m[2][(i*num_steps)+j],
+		    points->m[0][(i*num_steps)+j+1], points->m[1][(i*num_steps)+j+1], points->m[2][(i*num_steps)+j+1],
+		    points->m[0][(i*num_steps)+j+num_steps+1], points->m[1][(i*num_steps)+j+num_steps+1], points->m[2][(i*num_steps)+j+num_steps+1] );
+    }
+  }
+  add_polygon( edges,
+	       points->m[0][(i*num_steps)+j], points->m[1][(i*num_steps)+j], points->m[2][(i*num_steps)+j],
+	       points->m[0][num_steps], pionts->m[1][num_steps], points->m[2][num_steps],
+	       points->m[0][num_steps+1], points->m[1][num_steps+1], points->m[2][num_steps+1], );
+
+  add_polygon( edges,
+	       points->m[0][(i*num_steps)+j], points->m[1][(i*num_steps)+j], points->m[2][(i*num_steps)+j],
+	       points->m[0][(i*num_steps)+j+1], points->m[1][(i*num_steps)+j+1], points->m[2][(i*num_steps)+j+1],
+	       points->m[0][num_steps+1], points->m[1][num_steps+1], points->m[2][j+num_steps+1] );
+  
+    
+  /*
   int num_steps = (int)(1/step +0.1);
   int index, lat, longt;
   int latStop, longStop, latStart, longStart;
@@ -168,7 +195,8 @@ void add_sphere( struct matrix * edges,
 		points->m[1][index] + 1,
 		points->m[2][index] + 1);
     }
-  }  
+  }
+  */  
   free_matrix(points);
 }
 
