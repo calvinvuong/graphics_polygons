@@ -95,7 +95,27 @@ void add_box( struct matrix * edges,
   y1 = y-height;
   z0 = z;
   z1 = z-depth;
+
+
+  add_polygon(edges, x0, y0, z0, x1, y1, z0, x1, y0, z0);
+  add_polygon(edges, x0, y0, z0, x0, y1, z0, x1, y1, z0);
+
+  add_polygon(edges, x1, y0, z0, x1, y1, z0, x1, y1, z1);
+  add_polygon(edges, x1, y1, z1, x1, y0, z1, x1, y0, z0);
+
+  add_polygon(edges, x1, y0, z1, x1, y1, z1, x0, y1, z1);
+  add_polygon(edges, x0, y1, z1, x0, y0, z1, x1, y0, z1);
+
+  add_polygon(edges, x0, y0, z1, x0, y1, z1, x0, y1, z0);
+  add_polygon(edges, x0, y1, z0, x0, y0, z0, x0, y0, z1);
+
+  add_polygon(edges, x0, y0, z0, x1, y0, z0, x0, y0, z1);
+  add_polygon(edges, x0, y0, z1, x1, y0, z0, x1, y0, z1);
+
+  add_polygon(edges, x0, y1, z0, x1, y1, z1, x1, y1, z0);
+  add_polygon(edges, x1, y1, z1, x0, y1, z0, x0, y1, z1);
   
+  /*
   add_polygon(edges, x0, y0, z0, x1, y0, z0, x1, y1, z0);
   add_polygon(edges, x0, y0, z0, x0, y1, z0, x1, y1, z0);
 
@@ -113,8 +133,8 @@ void add_box( struct matrix * edges,
 
   add_polygon(edges, x0, y0, z0, x0, y0, z1, x1, y0, z1);
   add_polygon(edges, x0, y0, z0, x1, y0, z0, x1, y0, z1);
-  /*
-  //front
+  
+  
   add_edge(edges, x0, y0, z0, x0+2, y0+2, z0+2);
   add_edge(edges, x1, y0, z0, x1+2, y0+2, z0+2);
   add_edge(edges, x1, y1, z0, x1+2, y1+2, z0+2);
@@ -252,9 +272,6 @@ void add_torus( struct matrix * edges,
   longStart = 0;
   longStop = num_steps;
 
-  printf("num_steps/step: %d\n", (int) (num_steps/step));
-  printf("points->lastcol: %d\n", points->lastcol);
-  
   for ( lat = latStart; lat < latStop; lat++ ) {
     for ( longt = longStart; longt < longStop; longt++ ) {
 
