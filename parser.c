@@ -95,7 +95,7 @@ void parse_file ( char * filename,
     double theta;
     char axis;
     int type;
-    double step = 0.1;
+    double step = 0.05;
 
     if ( strncmp(line, "box", strlen(line)) == 0 ) {
       fgets(line, sizeof(line), f);
