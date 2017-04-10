@@ -32,15 +32,15 @@ void add_polygon( struct matrix *polygons,
   add_point(polygons, x2, y2, z2);
 }
 
-/*========== int backface() ===========
+/*========== int frontface() ===========
 Inputs:   double x0, y0, z0
           double x1, y1, z1
           double x2, y2, z2
 Returns:
-Returns 1 (true) if triangle is a backfacing
-Returns 0 (false) if triangle is frontfacing
+Returns 1 (true) if triangle is a frontfacing
+Returns 0 (false) if triangle is backfacing
 ====================================*/
-int  backface( double x0, double y0, double z0,
+int frontface( double x0, double y0, double z0,
 	       double x1, double y1, double z1,
 	       double x2, double y2, double z2 ) {
   double Ax = x1 - x0; double Ay = y1 - y0; 
@@ -74,7 +74,7 @@ void draw_polygons( struct matrix *polygons, screen s, color c ) {
     double z0 = polygons->m[2][point]; double z1 = polygons->m[2][point+1]; double z2 = polygons->m[2][point+2];
 
     
-    if ( backface(x0, y0, z0, x1, y1, z1, x2, y2, z2) != 0 ) { // only draw if front facing
+    if ( frontface(x0, y0, z0, x1, y1, z1, x2, y2, z2) != 0 ) { // only draw if front facing
       draw_line( x0, y0, x1, y1, s, c );
       draw_line( x0, y0, x2, y2, s, c );
       draw_line( x1, y1, x2, y2, s, c );
