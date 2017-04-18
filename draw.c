@@ -292,7 +292,6 @@ void add_torus( struct matrix * edges,
     for ( longt = longStart; longt < longStop-1; longt++ ) {
 
       index = lat * (num_steps) + longt;
-      printf("index: %d\n", index);
 
       double p0x = points->m[0][index % (points->lastcol)];
       double p0y = points->m[1][index % (points->lastcol)];
@@ -311,21 +310,23 @@ void add_torus( struct matrix * edges,
       double p3z = points->m[2][(index+num_steps) % (points->lastcol)];
 
       add_polygon( edges, p0x, p0y, p0z,
-		   p1x, p1y, p1z,
-		   p2x, p2y, p2z );
+		   p2x, p2y, p2z,
+		   p1x, p1y, p1z);
       add_polygon( edges, p2x, p2y, p2z,
-		   p3x, p3y, p3z,
-		   p0x, p0y, p0z );
+		   p0x, p0y, p0z,
+		   p3x, p3y, p3z);
     }
     // edge case
     int index_start = lat * (num_steps);
     add_polygon( edges, points->m[0][(index+1) % (points->lastcol)], points->m[1][(index+1) % (points->lastcol)], points->m[2][(index+1) % (points->lastcol)],
-		 points->m[0][index_start % (points->lastcol)], points->m[1][index_start % (points->lastcol)], points->m[2][index_start % (points->lastcol)],
-		 points->m[0][(index_start+num_steps) % (points->lastcol)], points->m[1][(index_start+num_steps) % (points->lastcol)], points->m[2][(index_start+num_steps) % (points->lastcol)] );
+		 points->m[0][(index_start+num_steps) % (points->lastcol)], points->m[1][(index_start+num_steps) % (points->lastcol)], points->m[2][(index_start+num_steps) % (points->lastcol)],
+		 points->m[0][index_start % (points->lastcol)], points->m[1][index_start % (points->lastcol)], points->m[2][index_start % (points->lastcol)] );
+
 
     add_polygon( edges, points->m[0][(index_start+num_steps) % (points->lastcol)], points->m[1][(index_start+num_steps) % (points->lastcol)], points->m[2][(index_start+num_steps) % (points->lastcol)],
-		 points->m[0][(index+1+num_steps) % (points->lastcol)], points->m[1][(index+1+num_steps) % (points->lastcol)], points->m[2][(index+1+num_steps) % (points->lastcol)],
-		 points->m[0][(index+1) % (points->lastcol)], points->m[1][(index+1) % (points->lastcol)], points->m[2][(index+1) % (points->lastcol)] );
+		 points->m[0][(index+1) % (points->lastcol)], points->m[1][(index+1) % (points->lastcol)], points->m[2][(index+1) % (points->lastcol)],
+		 points->m[0][(index+1+num_steps) % (points->lastcol)], points->m[1][(index+1+num_steps) % (points->lastcol)], points->m[2][(index+1+num_steps) % (points->lastcol)] );
+
     								   
   }
   
