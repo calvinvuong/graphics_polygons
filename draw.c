@@ -317,14 +317,15 @@ void add_torus( struct matrix * edges,
 		   p3x, p3y, p3z,
 		   p0x, p0y, p0z );
     }
+    // edge case
     int index_start = lat * (num_steps);
-    add_polygon( edges, points->m[0][index+1], points->m[1][index+1], points->m[2][index+1],
-		 points->m[0][index_start+0], points->m[1][index_start+0], points->m[2][index_start+0],
-		 points->m[0][index_start+num_steps], points->m[1][index_start+num_steps], points->m[2][index_start+num_steps] );
+    add_polygon( edges, points->m[0][(index+1) % (points->lastcol)], points->m[1][(index+1) % (points->lastcol)], points->m[2][(index+1) % (points->lastcol)],
+		 points->m[0][index_start % (points->lastcol)], points->m[1][index_start % (points->lastcol)], points->m[2][index_start % (points->lastcol)],
+		 points->m[0][(index_start+num_steps) % (points->lastcol)], points->m[1][(index_start+num_steps) % (points->lastcol)], points->m[2][(index_start+num_steps) % (points->lastcol)] );
 
-    add_polygon( edges, points->m[0][index_start+num_steps], points->m[1][index_start+num_steps], points->m[2][index_start+num_steps],
-		 points->m[0][index+1+num_steps], points->m[1][index+1+num_steps], points->m[2][index+1+num_steps],
-		 points->m[0][index+1], points->m[1][index+1], points->m[2][index+1] );
+    add_polygon( edges, points->m[0][(index_start+num_steps) % (points->lastcol)], points->m[1][(index_start+num_steps) % (points->lastcol)], points->m[2][(index_start+num_steps) % (points->lastcol)],
+		 points->m[0][(index+1+num_steps) % (points->lastcol)], points->m[1][(index+1+num_steps) % (points->lastcol)], points->m[2][(index+1+num_steps) % (points->lastcol)],
+		 points->m[0][(index+1) % (points->lastcol)], points->m[1][(index+1) % (points->lastcol)], points->m[2][(index+1) % (points->lastcol)] );
     								   
   }
   
