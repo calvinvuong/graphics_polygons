@@ -74,9 +74,9 @@ void parse_file ( char * filename,
   clear_screen(s);
 
   color c;
-  c.red = 0;
-  c.green = 0;
-  c.blue = 0;
+  c.red = 255;
+  c.green = 255;
+  c.blue = 255;
   
   if ( strcmp(filename, "stdin") == 0 ) 
     f = stdin;
@@ -95,7 +95,7 @@ void parse_file ( char * filename,
     double theta;
     char axis;
     int type;
-    double step = 0.1;
+    double step = 0.05;
 
     if ( strncmp(line, "box", strlen(line)) == 0 ) {
       fgets(line, sizeof(line), f);
